@@ -1,0 +1,11 @@
+{
+    "name": "node-cli",
+    "version": "0.0.1",
+    "description": "node js cli program",
+    "main": "index.js",
+    "author": "Jeeyoung HAN",
+    "license": "ISC",
+    "bin": {
+        "cli": "./index.js"
+    }
+}
