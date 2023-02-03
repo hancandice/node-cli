@@ -6,6 +6,7 @@
     "author": "Jeeyoung HAN",
     "license": "ISC",
     "bin": {
-        "cli": "./index.js"
+        "cli": "./index.js",
+        "template": "./template.js"
     }
 }
