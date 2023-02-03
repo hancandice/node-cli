@@ -7,6 +7,10 @@
     "license": "ISC",
     "bin": {
         "cli": "./index.js",
+        "template-practice": "./template-practice.js",
         "template": "./template.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2"
     }
 }
