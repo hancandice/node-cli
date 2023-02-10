@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+const chalk = require("chalk");
 const { program } = require("commander");
 const fs = require("fs");
 const inquirer = require("inquirer");
@@ -72,18 +73,18 @@ const mkfile = (filePath, fileName, fileExtension) => {
     if (fileExtension === "html") {
         const extToFile = path.join(filePath, `${fileName}.html`)
         if (exist(extToFile)) {
-            console.error(`❌ ${extToFile} already exists.`)
+            console.error(chalk.bold.red(`❌ ${extToFile} already exists.`))
         } else {
             fs.writeFileSync(extToFile, htmlTemplate)
-            console.log(`Successfully created ${extToFile} 😃`)
+            console.log(chalk.green(`Successfully created ${extToFile} 😃`))
         }
     } else {
         const extToFile = path.join(filePath, `${fileName}.js`)
         if (exist(extToFile)) {
-            console.error(`❌ ${extToFile} already exists.`)
+            console.error(chalk.bold.red(`❌ ${extToFile} already exists.`))
         } else {
             fs.writeFileSync(extToFile, routerTemplate)
-            console.log(`Successfully created ${extToFile} 😃`)
+            console.log(chalk.green(`Successfully created ${extToFile} 😃`))
         }
     }
 }
@@ -91,7 +92,7 @@ const mkfile = (filePath, fileName, fileExtension) => {
 
 const makeTemplate = (type, fileName, filePath) => {
     if (type !== "html" && type !== "express-router") {
-        console.error("We only support 'html' or 'express-router'.")
+        console.error(chalk.bold.red("We only support 'html' or 'express-router'."))
     } else {
         mkdirp(filePath)
         mkfile(filePath, fileName, type)
@@ -117,7 +118,7 @@ program
 program
     .action((cmd, argv) => {
         if (argv) {
-            console.log("cannot find this command line.")
+            console.log(chalk.bold.red("cannot find this command line."))
             program.help()
         } else {
             inquirer.prompt([{
@@ -143,7 +144,7 @@ program
                 .then((answers) => {
                     if (answers.confirm) {
                         makeTemplate(answers.type, answers.name, answers.path)
-                        console.log("Finishing the terminal...")
+                        console.log(chalk.bold.rgb(128, 128, 128)("Finishing the terminal..."))
                     }
                 })
         }

@@ -11,7 +11,7 @@
         "template": "./template.js"
     },
     "dependencies": {
-        "chalk": "^5.2.0",
+        "chalk": "4",
         "commander": "5",
         "express": "^4.18.2",
         "inquirer": "8"
