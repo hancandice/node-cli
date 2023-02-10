@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 
 const { program } = require("commander");
-const fs = require("fs")
+const fs = require("fs");
+const inquirer = require("inquirer");
 const path = require("path")
+
 
 
 const htmlTemplate = `
@@ -113,10 +115,38 @@ program
     })
 
 program
-    .command("*", { noHelp: true })
-    .action(() => {
-        console.log("cannot find this command line.")
-        program.help()
+    .action((cmd, argv) => {
+        if (argv) {
+            console.log("cannot find this command line.")
+            program.help()
+        } else {
+            inquirer.prompt([{
+                type: "list",
+                name: "type",
+                message: "Choose template type.",
+                choices: ["html", "express-router"]
+            }, {
+                type: "input",
+                name: "name",
+                message: "Type file name.",
+                default: "index"
+            }, {
+                type: "input",
+                name: "path",
+                message: "Type file path.",
+                default: "."
+            }, {
+                type: "confirm",
+                name: "confirm",
+                message: "You wanna create the file?"
+            }])
+                .then((answers) => {
+                    if (answers.confirm) {
+                        makeTemplate(answers.type, answers.name, answers.path)
+                        console.log("Finishing the terminal...")
+                    }
+                })
+        }
     })
 
 
